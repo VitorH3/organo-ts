@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
-import Funçoes from './componentes/Funções';
+import Setor from './componentes/Setor';
 import Rodape from './componentes/Rodape';
+import { IColaborador } from './compartilhado/interface/IColaborador';
 
 function App() {
 
-  const funçoes = [
+  const setores = [
     {
       nome: 'Comissão técnica',
       corPrimaria: '#82CFFA',
@@ -34,27 +35,30 @@ function App() {
     },
   ]
 
-  const [colaboradores, setColaboradores] = useState ([])
-  const aoNovoColaboradorAdicionado = (colaborador) => {
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>([])
+
+  const aoNovoColaboradorAdicionado = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores, colaborador])
   }
 
   return (
     <div className="App">
-      <Banner />
-      <Formulario funçoes = {funçoes.map(funçao => funçao.nome)} aoColaboradorCadastrado = {colaborador => aoNovoColaboradorAdicionado(colaborador)}/>
+      <Banner enderecoImagem='/imagens/banner.png' />
+      <Formulario
+        setores={setores.map(setor => setor.nome)}
+        aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)}
+      />
 
-      {funçoes.map(funçao => 
-      
-        <Funçoes
-          key = {funçao.none}
-          nome = {funçao.nome}
-          corPrimaria = {funçao.corPrimaria}
-          corSecundaria = {funçao.corSecundaria}
-          colaboradores = {colaboradores.filter(colaborador => colaborador.funçao === funçao.nome)}
+      {setores.map(setor =>
+        <Setor
+          key={setor.nome}
+          nome={setor.nome}
+          corPrimaria={setor.corPrimaria}
+          corSecundaria={setor.corSecundaria}
+          colaboradores={colaboradores.filter(colaborador => colaborador.setor === setor.nome)}
         />
       )}
-      <Rodape/>
+      <Rodape />
     </div>
   );
 }

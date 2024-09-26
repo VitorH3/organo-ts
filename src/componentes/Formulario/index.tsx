@@ -3,26 +3,32 @@ import Botao from '../Botao'
 import CampoTexto from '../CampoTexto'
 import ListaSuspensa from '../ListaSuspensa'
 import './Formulario.css'
+import { IColaborador } from '../../compartilhado/interface/IColaborador'
 
-const Formulario = (props) => {
+interface FormularioProps{
+    setores: string[]
+    aoColaboradorCadastrado: (colaborador: IColaborador) => void
+}
+
+const Formulario = (props: FormularioProps) => {
 
     const [nome, setNome] = useState ('')
-    const [posiçao, setPosiçao] = useState ('')
+    const [posicao, setPosicao] = useState ('')
     const [imagem, setImagem] = useState ('')
-    const [funçao, setFunçao] = useState('')
+    const [setor, setSetor] = useState('')
 
-    const aoSalvar = (evento) => {
+    const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
         props.aoColaboradorCadastrado ({
             nome,
-            posiçao,
+            posicao,
             imagem,
-            funçao
+            setor
         })
         setNome('')
-        setPosiçao('')
+        setPosicao('')
         setImagem('')
-        setFunçao('')
+        setSetor('')
     }
 
     return (
@@ -40,8 +46,8 @@ const Formulario = (props) => {
                     obrigatorio = {true}
                     label = "Posição/Cargo"
                     placeholder = "Digite sua posição ou cargo"
-                    valor = {posiçao}
-                    aoAlterado = {valor => setPosiçao(valor)}
+                    valor = {posicao}
+                    aoAlterado = {valor => setPosicao(valor)}
                 />
                 <CampoTexto
                     label = "Imagem"
@@ -52,9 +58,9 @@ const Formulario = (props) => {
                 <ListaSuspensa
                     obrigatorio = {true}
                     label = "Funções"
-                    itens = {props.funçoes}
-                    valor = {funçao}
-                    aoAlterado = {valor => setFunçao(valor)}
+                    itens = {props.setores}
+                    valor = {setor}
+                    aoAlterado = {valor => setSetor(valor)}
                 />
                 <Botao>
                     CRIAR CARD
