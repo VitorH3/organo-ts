@@ -24,6 +24,7 @@ const Setor = (props: SetorProps) => {
                         nome={colaborador.nome}
                         posicao={colaborador.posicao}
                         imagem={colaborador.imagem}
+                        data={colaborador.data}
                     />)}
             </div>
         </section>

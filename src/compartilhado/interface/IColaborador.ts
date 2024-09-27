@@ -3,4 +3,5 @@ export interface IColaborador {
     posicao: string
     imagem: string
     setor?: string
+    data: string
 }

@@ -16,6 +16,7 @@ const Formulario = (props: FormularioProps) => {
     const [posicao, setPosicao] = useState ('')
     const [imagem, setImagem] = useState ('')
     const [setor, setSetor] = useState('')
+    const [data, setData] = useState('')
 
     const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
@@ -23,12 +24,14 @@ const Formulario = (props: FormularioProps) => {
             nome,
             posicao,
             imagem,
-            setor
+            setor,
+            data
         })
         setNome('')
         setPosicao('')
         setImagem('')
         setSetor('')
+        setData('')
     }
 
     return (
@@ -54,6 +57,14 @@ const Formulario = (props: FormularioProps) => {
                     placeholder = "Informe o endereço da imagem"
                     valor = {imagem}
                     aoAlterado = {valor => setImagem(valor)}
+                />
+                <CampoTexto
+                    obrigatorio = {true}
+                    label = "Data de nascimento"
+                    placeholder = ""
+                    valor = {data}
+                    tipo = 'date'
+                    aoAlterado = {valor => setData(valor)}
                 />
                 <ListaSuspensa
                     obrigatorio = {true}
